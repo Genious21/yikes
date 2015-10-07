@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html manifest="cache.manifest">
+    <head>
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="viewport" content="initial-scale=1.0,user-scalable=no"/>
+   	
+        <title>Yikes! Setup</title>
+        <link type="text/css" rel="stylesheet" href="cooties.css" />
+        <script src="jquery-1.7.2.min.js" type="text/javascript"></script>
+        
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-31221637-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = 'ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		  
+
+		  $(document).ready(function() {
+			$('select#fldCritter').change(function() { 
+				$('#critter').attr('class', $('select#fldCritter').val() + ' bug spot');
+			});
+			$('#setup input').first().focus();
+			$('#setup button').click(function () {
+			  	localStorage["spots"] = $('#fldSpots').val();
+			  	localStorage["bugs"] = $('#fldBugs').val();
+			  	localStorage["teams"] = $('#fldTeams').val();
+			  	localStorage["critter"] = $('#fldCritter').val();
+			  	
+			  	window.location = '/';
+			});
+			
+			$('div.gallery div').click(function(e) {
+				$('#fldCritter').val($(this).find('div').text());
+			});
+		  });
+		  
+		</script>
+    </head>
+    <body>
+    	<div id="container">
+    		<div id="setup">
+				<h1>Yikes!</h1>
+	    		<div>
+					<label for="fldSpots"># Spots: </label>
+					<input id="fldSpots" name="spots" type="number" autofocus="true" max="40" min="12" placeholder="# Spots" required="true" title="The number of spots or 'coins' to generate" value="24">
+				</div>
+				<div>
+					<label for="fldBugs"># Bugs: </label>
+					<input id="fldBugs" name="bugs" type="number" max="20" min="2" placeholder="# Bugs" required="true" title="The number of bugs to generate (in addition to spots)" value="6">
+				</div>
+				<div>
+					<label for="fldTeams"># Teams: </label>
+					<input id="fldTeams" name="teams" type="number" max="4" min="1" placeholder="# Teams" required="true" title="The number of teams playing" value="4">
+				</div>
+				<div>
+					<label for="fldCritter">Critter: </label>
+					<input id="fldCritter" name="critter" type="text" value="shark" readonly="readonly">
+					<div class="gallery">
+						<div><img src="images/48/alien.png" alt=""/><div>alien</div></div>
+						<div><img src="images/48/alligator.png" alt=""/><div>alligator</div></div>
+						<div><img src="images/48/angel.png" alt=""/><div>angel</div></div>
+						<div><img src="images/48/ant.png" alt=""/><div>ant</div></div>
+						<div><img src="images/48/baby.png" alt=""/><div>baby</div></div>
+						<div><img src="images/48/bat.png" alt=""/><div>bat</div></div>
+						<div><img src="images/48/bear.png" alt=""/><div>bear</div></div>
+						<div><img src="images/48/bee.png" alt=""/><div>bee</div></div>
+						<div><img src="images/48/bird.png" alt=""/><div>bird</div></div>
+						<div><img src="images/48/boxer.png" alt=""/><div>boxer</div></div>
+						<div><img src="images/48/bull.png" alt=""/><div>bull</div></div>
+						<div><img src="images/48/bulldog.png" alt=""/><div>bulldog</div></div>
+						<div><img src="images/48/butterfly.png" alt=""/><div>butterfly</div></div>
+						<div><img src="images/48/cat.png" alt=""/><div>cat</div></div>
+						<div><img src="images/48/chef.png" alt=""/><div>chef</div></div>
+						<div><img src="images/48/chicken.png" alt=""/><div>chicken</div></div>
+						<div><img src="images/48/clown.png" alt=""/><div>clown</div></div>
+						<div><img src="images/48/cow.png" alt=""/><div>cow</div></div>
+						<div><img src="images/48/crab.png" alt=""/><div>crab</div></div>
+						<div><img src="images/48/crocodile.png" alt=""/><div>crocodile</div></div>
+						<div><img src="images/48/dad.png" alt=""/><div>dad</div></div>
+						<div><img src="images/48/deer.png" alt=""/><div>deer</div></div>
+						<div><img src="images/48/devil.png" alt=""/><div>devil</div></div>
+						<div><img src="images/48/doctor.png" alt=""/><div>doctor</div></div>
+						<div><img src="images/48/dog.png" alt=""/><div>dog</div></div>
+						<div><img src="images/48/donkey.png" alt=""/><div>donkey</div></div>
+						<div><img src="images/48/dragon.png" alt=""/><div>dragon</div></div>
+						<div><img src="images/48/duck.png" alt=""/><div>duck</div></div>
+						<div><img src="images/48/eagle.png" alt=""/><div>eagle</div></div>
+						<div><img src="images/48/elephant.png" alt=""/><div>elephant</div></div>
+						<div><img src="images/48/firefighter.png" alt=""/><div>firefighter</div></div>
+						<div><img src="images/48/fish.png" alt=""/><div>fish</div></div>
+						<div><img src="images/48/fox.png" alt=""/><div>fox</div></div>
+						<div><img src="images/48/frog.png" alt=""/><div>frog</div></div>
+						<div><img src="images/48/ghost.png" alt=""/><div>ghost</div></div>
+						<div><img src="images/48/giraffe.png" alt=""/><div>giraffe</div></div>
+						<div><img src="images/48/girl.png" alt=""/><div>girl</div></div>
+						<div><img src="images/48/gorilla.png" alt=""/><div>gorilla</div></div>
+						<div><img src="images/48/hippo.png" alt=""/><div>hippo</div></div>
+						<div><img src="images/48/horse.png" alt=""/><div>horse</div></div>
+						<div><img src="images/48/insect.png" alt=""/><div>insect</div></div>
+						<div><img src="images/48/kid.png" alt=""/><div>kid</div></div>
+						<div><img src="images/48/king.png" alt=""/><div>king</div></div>
+						<div><img src="images/48/knight.png" alt=""/><div>knight</div></div>
+						<div><img src="images/48/lawyer.png" alt=""/><div>lawyer</div></div>
+						<div><img src="images/48/leprechaun.png" alt=""/><div>leprechaun</div></div>
+						<div><img src="images/48/lion.png" alt=""/><div>lion</div></div>
+						<div><img src="images/48/man.png" alt=""/><div>man</div></div>
+						<div><img src="images/48/mermaid.png" alt=""/><div>mermaid</div></div>
+						<div><img src="images/48/monkey.png" alt=""/><div>monkey</div></div>
+						<div><img src="images/48/monster.png" alt=""/><div>monster</div></div>
+						<div><img src="images/48/moose.png" alt=""/><div>moose</div></div>
+						<div><img src="images/48/mouse.png" alt=""/><div>mouse</div></div>
+						<div><img src="images/48/ninja.png" alt=""/><div>ninja</div></div>
+						<div><img src="images/48/nurse.png" alt=""/><div>nurse</div></div>
+						<div><img src="images/48/owl.png" alt=""/><div>owl</div></div>
+						<div><img src="images/48/panda.png" alt=""/><div>panda</div></div>
+						<div><img src="images/48/penguin.png" alt=""/><div>penguin</div></div>
+						<div><img src="images/48/pig.png" alt=""/><div>pig</div></div>
+						<div><img src="images/48/pirate.png" alt=""/><div>pirate</div></div>
+						<div><img src="images/48/policeman.png" alt=""/><div>policeman</div></div>
+						<div><img src="images/48/prince.png" alt=""/><div>prince</div></div>
+						<div><img src="images/48/princess.png" alt=""/><div>princess</div></div>
+						<div><img src="images/48/queen.png" alt=""/><div>queen</div></div>
+						<div><img src="images/48/rabbit.png" alt=""/><div>rabbit</div></div>
+						<div><img src="images/48/rhino.png" alt=""/><div>rhino</div></div>
+						<div><img src="images/48/robot.png" alt=""/><div>robot</div></div>
+						<div><img src="images/48/rooster.png" alt=""/><div>rooster</div></div>
+						<div><img src="images/48/santa.png" alt=""/><div>santa</div></div>
+						<div><img src="images/48/shark.png" alt=""/><div>shark</div></div>
+						<div><img src="images/48/sheep.png" alt=""/><div>sheep</div></div>
+						<div><img src="images/48/snake.png" alt=""/><div>snake</div></div>
+						<div><img src="images/48/snowman.png" alt=""/><div>snowman</div></div>
+						<div><img src="images/48/superhero.png" alt=""/><div>superhero</div></div>
+						<div><img src="images/48/teacher.png" alt=""/><div>teacher</div></div>
+						<div><img src="images/48/tiger.png" alt=""/><div>tiger</div></div>
+						<div><img src="images/48/troll.png" alt=""/><div>troll</div></div>
+						<div><img src="images/48/turkey.png" alt=""/><div>turkey</div></div>
+						<div><img src="images/48/turtle.png" alt=""/><div>turtle</div></div>
+						<div><img src="images/48/vampire.png" alt=""/><div>vampire</div></div>
+						<div><img src="images/48/werewolf.png" alt=""/><div>werewolf</div></div>
+						<div><img src="images/48/witch.png" alt=""/><div>witch</div></div>
+						<div><img src="images/48/wolf.png" alt=""/><div>wolf</div></div>
+						<div><img src="images/48/zombie.png" alt=""/><div>zombie</div></div>
+					</div>
+				</div>
+	   			<button>Start</button>
+	    	</div>
+    	</div>
+	</body>	
+</html>

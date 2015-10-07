@@ -1,0 +1,325 @@
+/* http://www.iconarchive.com/show/animal-icons-by-martin-berube/snake-icon.html  */
+
+@font-face {
+	font-family: 'Dosis';
+	font-weight:normal;
+	font-style:normal;
+	src: local('Dosis'), url('Dosis400GoogleFont.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Dosis';
+	font-weight:bold;
+	font-style:normal;
+	src: local('Dosis'), url('Dosis700GoogleFont.woff') format('woff');
+}
+
+#farm div.spot {
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition: all .2s ease-in-out;
+	-webkit-transform-origin: center center;
+
+	position:absolute;
+}
+
+div.spot {
+	height: 4em;
+	width: 4em;
+}
+
+#farm div.spot div {
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 2em;
+	cursor:pointer;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+#farm div.front {
+	background-color: #444;
+	z-index: 900;
+}
+
+#farm div.flip div.front {
+	z-index: 900;
+}
+
+#farm .flip {
+	-webkit-transform: rotateX(180deg);
+}
+
+#farm div.back {
+	-webkit-transform: rotateX(180deg);
+	text-align:center;
+	vertical-align:middle;
+	z-index: 800;
+}
+
+#farm div.flip div.back  {
+	z-index: 1000;
+}
+
+#farm div.back span {
+	color:#333;
+	font-size:3em;
+}
+
+#farm .front:hover {
+	background-color: #CCC;
+}
+
+.shadow {
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+}
+
+.alien div.back { background-image: url('images/48/alien.png');}
+.alligator div.back { background-image: url('images/48/alligator.png');}
+.angel div.back { background-image: url('images/48/angel.png');}
+.ant div.back { background-image: url('images/48/ant.png');}
+.baby div.back { background-image: url('images/48/baby.png');}
+.bat div.back { background-image: url('images/48/bat.png');}
+.bear div.back { background-image: url('images/48/bear.png');}
+.bee div.back { background-image: url('images/48/bee.png');}
+.bird div.back { background-image: url('images/48/bird.png');}
+.boxer div.back { background-image: url('images/48/boxer.png');}
+.bull div.back { background-image: url('images/48/bull.png');}
+.bulldog div.back { background-image: url('images/48/bulldog.png');}
+.butterfly div.back { background-image: url('images/48/butterfly.png');}
+.cat div.back { background-image: url('images/48/cat.png');}
+.chef div.back { background-image: url('images/48/chef.png');}
+.chicken div.back { background-image: url('images/48/chicken.png');}
+.clown div.back { background-image: url('images/48/clown.png');}
+.cow div.back { background-image: url('images/48/cow.png');}
+.crab div.back { background-image: url('images/48/crab.png');}
+.crocodile div.back { background-image: url('images/48/crocodile.png');}
+.dad div.back { background-image: url('images/48/dad.png');}
+.deer div.back { background-image: url('images/48/deer.png');}
+.devil div.back { background-image: url('images/48/devil.png');}
+.doctor div.back { background-image: url('images/48/doctor.png');}
+.dog div.back { background-image: url('images/48/dog.png');}
+.donkey div.back { background-image: url('images/48/donkey.png');}
+.dragon div.back { background-image: url('images/48/dragon.png');}
+.duck div.back { background-image: url('images/48/duck.png');}
+.eagle div.back { background-image: url('images/48/eagle.png');}
+.elephant div.back { background-image: url('images/48/elephant.png');}
+.firefighter div.back { background-image: url('images/48/firefighter.png');}
+.fish div.back { background-image: url('images/48/fish.png');}
+.fox div.back { background-image: url('images/48/fox.png');}
+.frog div.back { background-image: url('images/48/frog.png');}
+.ghost div.back { background-image: url('images/48/ghost.png');}
+.giraffe div.back { background-image: url('images/48/giraffe.png');}
+.girl div.back { background-image: url('images/48/girl.png');}
+.gorilla div.back { background-image: url('images/48/gorilla.png');}
+.hippo div.back { background-image: url('images/48/hippo.png');}
+.horse div.back { background-image: url('images/48/horse.png');}
+.insect div.back { background-image: url('images/48/insect.png');}
+.kid div.back { background-image: url('images/48/kid.png');}
+.king div.back { background-image: url('images/48/king.png');}
+.knight div.back { background-image: url('images/48/knight.png');}
+.lawyer div.back { background-image: url('images/48/lawyer.png');}
+.leprechaun div.back { background-image: url('images/48/leprechaun.png');}
+.lion div.back { background-image: url('images/48/lion.png');}
+.man div.back { background-image: url('images/48/man.png');}
+.mermaid div.back { background-image: url('images/48/mermaid.png');}
+.monkey div.back { background-image: url('images/48/monkey.png');}
+.monster div.back { background-image: url('images/48/monster.png');}
+.moose div.back { background-image: url('images/48/moose.png');}
+.mouse div.back { background-image: url('images/48/mouse.png');}
+.ninja div.back { background-image: url('images/48/ninja.png');}
+.nurse div.back { background-image: url('images/48/nurse.png');}
+.owl div.back { background-image: url('images/48/owl.png');}
+.panda div.back { background-image: url('images/48/panda.png');}
+.penguin div.back { background-image: url('images/48/penguin.png');}
+.pig div.back { background-image: url('images/48/pig.png');}
+.pirate div.back { background-image: url('images/48/pirate.png');}
+.policeman div.back { background-image: url('images/48/policeman.png');}
+.prince div.back { background-image: url('images/48/prince.png');}
+.princess div.back { background-image: url('images/48/princess.png');}
+.queen div.back { background-image: url('images/48/queen.png');}
+.rabbit div.back { background-image: url('images/48/rabbit.png');}
+.rhino div.back { background-image: url('images/48/rhino.png');}
+.robot div.back { background-image: url('images/48/robot.png');}
+.rooster div.back { background-image: url('images/48/rooster.png');}
+.santa div.back { background-image: url('images/48/santa.png');}
+.shark div.back { background-image: url('images/48/shark.png');}
+.sheep div.back { background-image: url('images/48/sheep.png');}
+.snake div.back { background-image: url('images/48/snake.png');}
+.snowman div.back { background-image: url('images/48/snowman.png');}
+.superhero div.back { background-image: url('images/48/superhero.png');}
+.teacher div.back { background-image: url('images/48/teacher.png');}
+.tiger div.back { background-image: url('images/48/tiger.png');}
+.troll div.back { background-image: url('images/48/troll.png');}
+.turkey div.back { background-image: url('images/48/turkey.png');}
+.turtle div.back { background-image: url('images/48/turtle.png');}
+.vampire div.back { background-image: url('images/48/vampire.png');}
+.werewolf div.back { background-image: url('images/48/werewolf.png');}
+.witch div.back { background-image: url('images/48/witch.png');}
+.wolf div.back { background-image: url('images/48/wolf.png');}
+.zombie div.back { background-image: url('images/48/zombie.png');}
+
+
+.bug div.back {
+	background-position: center center;
+	background-repeat:no-repeat;
+}
+
+.bug div.back span {
+	visibility:hidden;
+}
+
+#farm {
+	padding-right: 180px;
+	height: 100%;
+	text-align:center;
+	vertical-align:middle;
+	color: #f0f0f0;
+	-webkit-perspective:800px;
+}
+
+#scoreboard {
+	border: solid 1px #EEE;
+	background-color:#FFF;
+	width:9em;
+	position:absolute;
+	right:0;
+	top: 0;
+	text-align: center;
+	color: #000;
+	font-size: 1em;
+}
+
+#scoreboard h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#scoreboard div.myturn {
+	border: solid 4px #000;
+	font-weight:bold;
+
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+	box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+}
+
+#scoreboard div.team {
+	margin-bottom: 1em;
+}
+
+#scoreboard div.name {
+	font-size:2em;
+}
+
+#scoreboard div.points {
+	font-size:3em;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Dosis', sans-serif;
+}
+
+/* team colors http://colorschemedesigner.com/#2P42Pw0w0w0w0 */
+
+.redb { background-color: #FF7373; }
+.greenb { background-color: #67E667; }
+.blueb { background-color: #876ED7; }
+.yellowb { background-color: #FFE773; }
+
+.red { color: #FF7373; }
+.green { color: #67E667; }
+.blue { color: #876ED7; }
+.yellow { color: #FFE773; }
+
+
+div.watermark {
+	font-size: 10em;
+	margin: auto auto;
+	z-index: -2;
+	position:relative;
+	top:25%;
+	text-align:center;
+	font-weight:bolder;
+	text-shadow: 1px 1px 3px #444;
+}
+
+#scoreboard .info {
+	font-size: .8em;
+	margin-bottom:.5em;
+}
+
+#scoreboard button {
+	border-radius: .25em;
+	font-size: 1em; 
+}
+
+#container {
+	text-align:center;
+}
+
+#container form {
+	margin: 0 auto;
+}
+
+#setup label {
+	width: 4em;
+	display:inline-block;
+}
+
+#setup h1 {
+	margin-bottom: .5em;
+}
+
+#setup .button {
+	margin-top: .5em;
+	border-radius: .25em;
+	font-size: 1em; 
+}
+
+#setup div.spot {
+	text-align:center;
+	position:relative;
+	margin: auto auto;
+}
+
+#setup div.spot div {
+	width: 100%;
+	height: 100%;
+	text-align:center;
+	position:relative;
+	margin: auto auto;
+}
+
+#fldCritter {
+	width: 5em;
+}
+
+.gallery {
+}
+
+.gallery div {
+	display:inline-block;
+	text-align:center;
+	margin:.2em;
+	padding: 1px;
+	cursor:pointer;
+}
+
+.gallery div:hover {
+	background-color: #ddd;
+}
+
+.gallery img {
+	display:block;
+	margin: 0 auto;
+}
+

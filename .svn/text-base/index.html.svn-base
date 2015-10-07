@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html manifest="cache.manifest">
+    <head>
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+   	
+        <title>Yikes!</title>
+        <link type="text/css" rel="stylesheet" href="cooties.css" />
+        <script src="jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="cooties.js" type="text/javascript"></script>
+        
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-31221637-1']);
+			_gaq.push(['_trackPageview']);
+			
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = 'ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+    </head>
+    <body>
+    	<div id="farm">
+			<div class='watermark'>Yikes!</div>
+			<div id="scoreboard">
+				<h1>Score</h1>
+				<div class='info'></div>
+				<div class='teams'></div>
+				<a href="setup.html"><button>Setup/Start Game</button></a>
+			</div>
+    	</div>
+    </body>
+</html>
+
