@@ -232,12 +232,12 @@ body {
 
 .redb { background-color: #FF7373; }
 .greenb { background-color: #67E667; }
-.blueb { background-color: #876ED7; }
+.blueb { background-color: #5b90f6; }
 .yellowb { background-color: #FFE773; }
 
 .red { color: #FF7373; }
 .green { color: #67E667; }
-.blue { color: #876ED7; }
+.blue { color: #5b90f6; }
 .yellow { color: #FFE773; }
 
 
@@ -250,6 +250,7 @@ div.watermark {
 	text-align:center;
 	font-weight:bolder;
 	text-shadow: 1px 1px 3px #444;
+  opacity: .5;
 }
 
 #scoreboard .info {
@@ -259,7 +260,7 @@ div.watermark {
 
 #scoreboard button {
 	border-radius: .25em;
-	font-size: 1em; 
+	font-size: 1em;
 }
 
 #container {
@@ -282,7 +283,7 @@ div.watermark {
 #setup .button {
 	margin-top: .5em;
 	border-radius: .25em;
-	font-size: 1em; 
+	font-size: 1em;
 }
 
 #setup div.spot {
@@ -323,3 +324,6 @@ div.watermark {
 	margin: 0 auto;
 }
 
+.gallery.chosen {
+	background-color: #ccc;
+}

@@ -13,6 +13,9 @@ var retryLimit = 200;		// don't try to find an empty place for a spot more than 
 
 var circlePadding = 5;		// same as padding of style for circle
 
+var priorSpot = -1;        // to help determine if this is a second tap
+var spotTapCount = 0;     // first tap - shake, send tap - flip
+
 function addTeams(numTeams) {
 	var team = {
 		name: 'Red',
@@ -29,7 +32,7 @@ function addTeams(numTeams) {
 		};
 		teams[1] = team;
 	}
-	
+
 	if (numTeams > 2) {
 		team = {
 			name: 'Green',
@@ -47,7 +50,7 @@ function addTeams(numTeams) {
 		};
 		teams[3] = team;
 	}
-	
+
 	for (var j = 0; j < teams.length; j++) {
 		var d = document.createElement("div");
 		d.innerHTML = "<div class='name'></div><div class='points'>0</div>";
@@ -77,7 +80,7 @@ function makeSpots(farm, numberOfSpots, numberOfBugs, typeOfBug) {
 		farm.appendChild(d);
 		var circleDiameter = $(d).width();	// same as width and height of style of circle
 		farm.removeChild(d);
-		
+
 		var gridHeight = farm.clientHeight - circleDiameter - circlePadding * 2;
 		var gridWidth = farm.clientWidth - circleDiameter - circlePadding * 2;
 
@@ -91,37 +94,37 @@ function makeSpots(farm, numberOfSpots, numberOfBugs, typeOfBug) {
 			spot.width = circleDiameter + circlePadding;
 			spot.height = spot.width;
 			spot.points = Math.floor(Math.random()*maxPoints)+minPoints;
-			
+
 			//var collision = false;
 			// indicate collision if already behind the scoreboard
 			var collision = (spot.x + spot.width > $('#scoreboard')[0].offsetLeft &&
 				spot.y - spot.height < $('#scoreboard')[0].offsetTop + $('#scoreboard')[0].offsetHeight);
-			// indicate collision with another spot 
+			// indicate collision with another spot
 			for (var j = 0; j<i && !collision; j++) {
 				collision = isOverlapping(spot, spots[j], 10);
 			}
-			
+
 			if (collision) {
 				retries++;
 				continue;
 			}
 			retries = 0;
-			
+
 			spots[i] = spot;
 			i++;
 		}
-		
+
 		// make sure we have the requisite number of bugs
 		for (var j = 0; j < numberOfBugs && j < i; j++) {
 			spots[j].points = 0;
 		}
-		
+
 		// only show setup info if we could not meet their request
 		if (retries >= retryLimit) {
-			console.log('bailed out -- not enough room for all those spots');			
+			console.log('bailed out -- not enough room for all those spots');
 			$('#scoreboard .info').text(i.toString() + '/' + j.toString());
 		}
-		
+
 		// add spots to dom
 		for (var j = 0; j < i; j++) {
 			// create the spot html element to display
@@ -129,7 +132,7 @@ function makeSpots(farm, numberOfSpots, numberOfBugs, typeOfBug) {
 			d.className = "spot " + (spots[j].points == 0 ? 'bug ' + typeOfBug : '');
 			d.style.top = spots[j].y.toString() + "px";
 			d.style.left = spots[j].x.toString() + "px";
-			d.innerHTML = "<div class='front shadow'></div>" + 
+			d.innerHTML = "<div class='front shadow'></div>" +
 				"<div class='back shadow'><span>" + spots[j].points.toString() + "</span></div>";
 			d.setAttribute("spot", j.toString());
 			farm.appendChild(d);
@@ -143,15 +146,15 @@ function resetGame() {
 	spots = Array();
 	// remove any preexisting spots from the dom
 	$('div#farm .spot').remove();
-	
+
 	// set up the teams
 	teams = Array();
 	// remove all preexisting team objects from dom
 	$('#scoreboard .teams').children('div.team').remove();
-					
+
 	teamsTurn = 0;
 	currentPoints = 0;
-	
+
 	indicateWinningTeam();
 }
 
@@ -162,14 +165,14 @@ function indicateWinningTeam() {
 	{
 		if (teams[j].points >= winningPoints) {
 			winningTeam = j;
-			winningPoints = teams[j].points; 
+			winningPoints = teams[j].points;
 		}
 	}
 
 	// todo: what to do if there is a tie?
-	
+
 	if (winningTeam != -1 && winningPoints > 0) {
-		$('.watermark').attr('class', 'watermark ' + teams[winningTeam].colorClass.substring(0, teams[winningTeam].colorClass.length - 1));	
+		$('.watermark').attr('class', 'watermark ' + teams[winningTeam].colorClass.substring(0, teams[winningTeam].colorClass.length - 1));
 	} else
 	{
 		$('.watermark').attr('class', 'watermark');
@@ -178,145 +181,140 @@ function indicateWinningTeam() {
 
 function startGame() {
 	resetGame();
-	
+
 	$('#scoreboard').show();
-	
+
 	var typeOfBug = localStorage["critter"];
-	
+
 	addTeams(localStorage["teams"]);
 	makeSpots($("#farm")[0], parseInt(localStorage["spots"]), parseInt(localStorage["bugs"]), typeOfBug);
-	
+
 	// set up click/tap panels
-	$('.spot').toggle(function(){
+	$('.spot').on('click', function() {
 		// uncover
 		if ($(this).hasClass('flip')) {
 			// don't do anything because it has already been flipped
 		}
 		else
 		{
-			$(this).addClass('flip');
-			$(this).children('.back').first().addClass(teams[teamsTurn].colorClass);
-			$(this).attr("team", teamsTurn.toString());
-			
-			var points = spots[parseInt($(this).attr("spot"))].points;
-			
-			// add points to current team
-			if (points === 0) {
-				// it's a bug!
-				$(this).addClass('bug');
-	
-				// zero score
-				teams[teamsTurn].points -= currentPoints;
-				$(teams[teamsTurn].element).children('div.points').first().text(teams[teamsTurn].points.toString());
-	
-				// move to next team
-				// set that team as active team
-				$(teams[teamsTurn].element).removeClass('myturn');
-				
-				currentPoints = 0;
-				teamsTurn++;
-				if (teamsTurn >= teams.length)
-					teamsTurn = 0;
-				$(teams[teamsTurn].element).addClass('myturn');
-	
-			} else {
-				currentPoints += points;
-				teams[teamsTurn].points += points;
-				$(teams[teamsTurn].element).children('div.points').first().text(teams[teamsTurn].points.toString());
-			}
-			
-			indicateWinningTeam();
-		}
-	},function(){
-		// cover
-/*		if (confirm('Are you sure you want to undo this move?')) {
-			$(this).removeClass('flip');
-			$(this).children('.back').first().removeClass(teams[parseInt($(this).attr('team'))].colorClass);
-			
-			// remove points from team that had this spot - don't go below zero
-			var t = parseInt($(this).attr("team"));
-			teams[t].points -= spots[parseInt($(this).attr("spot"))].points;
-			if (teams[t].points < 0)
-				teams[t].points = 0;
-			$(teams[t].element).children('div.points').first().text(teams[t].points.toString());
+      // if it has not been shaken yet, then shake it
+      var id = parseInt($(this).attr("spot"));
+      if (priorSpot != id) {
+        priorSpot = id;
+        $(this).find('.front').effect('shake');
+      } else {
+        // make it flip over
+  			$(this).addClass('flip');
+  			$(this).children('.back').first().addClass(teams[teamsTurn].colorClass);
+  			$(this).attr("team", teamsTurn.toString());
 
-			indicateWinningTeam();
+  			var points = spots[parseInt($(this).attr("spot"))].points;
+
+  			// add points to current team
+  			if (points === 0) {
+  				// it's a bug!
+  				$(this).addClass('bug');
+
+  				// zero score
+  				teams[teamsTurn].points -= currentPoints;
+  				$(teams[teamsTurn].element).children('div.points').first().text(teams[teamsTurn].points.toString());
+
+  				// move to next team
+  				// set that team as active team
+  				$(teams[teamsTurn].element).removeClass('myturn');
+
+  				currentPoints = 0;
+  				teamsTurn++;
+  				if (teamsTurn >= teams.length)
+  					teamsTurn = 0;
+  				$(teams[teamsTurn].element).addClass('myturn');
+          $(teams[teamsTurn].element).effect('pulsate', 10);
+  			} else {
+  				currentPoints += points;
+  				teams[teamsTurn].points += points;
+  				$(teams[teamsTurn].element).children('div.points').first().text(teams[teamsTurn].points.toString());
+  			}
+
+  			indicateWinningTeam();
+      }
 		}
-*/	});
-	
+	});
+
 	$('.team').click(function() {
 		// set that team as active team
 		$(teams[teamsTurn].element).removeClass('myturn');
-		
+
 		teamsTurn = parseInt($(this).attr('team'));
 		$(teams[teamsTurn].element).addClass('myturn');
-		currentPoints = 0;
+    $(teams[teamsTurn].element).effect('pulsate', 10);
+		currentPoints = 0; // this round
+    priorSpot = -1; // no prior spot
 	});
-	
+
 }
 
 $(document).ready(function () {
 	// check the index.html for setup info, if none default
 	if (localStorage["spots"] == null) {
 		// initialize here
-		
+
 		localStorage["spots"] = "24";
 		localStorage["bugs"] = "4";
 		localStorage["teams"] = "4";
 		localStorage["critter"] = "shark";
 	}
-	
+
 	// set the name of the game to the critter chosen
 	$(".watermark").text(localStorage["critter"] + "!");
 
 	// set up the reset button
 	//$('#scoreboard button').click(function () {
-	//	return confirm('Are you sure you want to reset the game?'); 
+	//	return confirm('Are you sure you want to reset the game?');
 	//});
-	
+
 	startGame();
 });
 
 
-var cacheStatusValues = [];
-cacheStatusValues[0] = 'uncached';
-cacheStatusValues[1] = 'idle';
-cacheStatusValues[2] = 'checking';
-cacheStatusValues[3] = 'downloading';
-cacheStatusValues[4] = 'updateready';
-cacheStatusValues[5] = 'obsolete';
+// var cacheStatusValues = [];
+// cacheStatusValues[0] = 'uncached';
+// cacheStatusValues[1] = 'idle';
+// cacheStatusValues[2] = 'checking';
+// cacheStatusValues[3] = 'downloading';
+// cacheStatusValues[4] = 'updateready';
+// cacheStatusValues[5] = 'obsolete';
+//
+// var cache = window.applicationCache;
+// cache.addEventListener('cached', logEvent, false);
+// cache.addEventListener('checking', logEvent, false);
+// cache.addEventListener('downloading', logEvent, false);
+// cache.addEventListener('error', logEvent, false);
+// cache.addEventListener('noupdate', logEvent, false);
+// cache.addEventListener('obsolete', logEvent, false);
+// cache.addEventListener('progress', logEvent, false);
+// cache.addEventListener('updateready', logEvent, false);
 
-var cache = window.applicationCache;
-cache.addEventListener('cached', logEvent, false);
-cache.addEventListener('checking', logEvent, false);
-cache.addEventListener('downloading', logEvent, false);
-cache.addEventListener('error', logEvent, false);
-cache.addEventListener('noupdate', logEvent, false);
-cache.addEventListener('obsolete', logEvent, false);
-cache.addEventListener('progress', logEvent, false);
-cache.addEventListener('updateready', logEvent, false);
+// function logEvent(e) {
+//     var online, status, type, message;
+//     online = (navigator.onLine) ? 'yes' : 'no';
+//     status = cacheStatusValues[cache.status];
+//     type = e.type;
+//     message = 'online: ' + online;
+//     message+= ', event: ' + type;
+//     message+= ', status: ' + status;
+//     if (type == 'error' && navigator.onLine) {
+//         message+= ' (prolly a syntax error in manifest)';
+//     }
+//     console.log(message);
+// }
+//
+// window.applicationCache.addEventListener(
+//     'updateready',
+//     function(){
+//         window.applicationCache.swapCache();
+//         console.log('swap cache has been called');
+//     },
+//     false
+// );
 
-function logEvent(e) {
-    var online, status, type, message;
-    online = (navigator.onLine) ? 'yes' : 'no';
-    status = cacheStatusValues[cache.status];
-    type = e.type;
-    message = 'online: ' + online;
-    message+= ', event: ' + type;
-    message+= ', status: ' + status;
-    if (type == 'error' && navigator.onLine) {
-        message+= ' (prolly a syntax error in manifest)';
-    }
-    console.log(message);
-}
-
-window.applicationCache.addEventListener(
-    'updateready',
-    function(){
-        window.applicationCache.swapCache();
-        console.log('swap cache has been called');
-    },
-    false
-);
-
-setInterval(function(){cache.update()}, 10000);
+// setInterval(function(){cache.update()}, 10000);
