@@ -273,7 +273,7 @@ $(document).ready(function () {
 	//});
 
   $('.setup-button').on('click', function () {
-    window.location.href = '/setup.html';
+    window.location.href = 'setup.html';
   });
 
 	startGame();
